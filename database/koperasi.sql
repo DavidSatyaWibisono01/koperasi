@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2023 at 10:10 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Generation Time: Aug 06, 2023 at 10:43 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_koperasi`
+-- Database: `koperasi`
 --
 
 -- --------------------------------------------------------
@@ -44,16 +44,19 @@ CREATE TABLE `anggota` (
   `Tanggal_masuk` date DEFAULT NULL,
   `Simpanan_pokok` decimal(10,2) DEFAULT NULL,
   `smk` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `anggota`
 --
 
 INSERT INTO `anggota` (`No_anggota`, `Nama_anggota`, `Alamat`, `Kota`, `Kode_pos`, `Tempat_lahir`, `Tanggal_lahir`, `Umur`, `No_KTP`, `Jenis_kelamin`, `Telepon`, `Pendidikan`, `Pekerjaan_Jabatan`, `Tanggal_masuk`, `Simpanan_pokok`, `smk`) VALUES
+('2113', 'asd', 'asd', 'asd', '234', 'asd', '2023-08-16', '34', '234', '1', '2324', 'asda', 'sdasd', '2023-08-14', '0.00', '0'),
 ('AG001', 'John Doe', 'Jalan ABC No. 123', 'Jakarta', '12345', 'Jakarta', '1990-01-01', '33', '1234567890', '1', '081234567890', 'S1 Teknik Informatika', 'Pegawai Swasta', '2022-01-01', '1000000.00', '10000'),
 ('AG002', 'Jany Romince', 'Jalan XYZ No. 456', 'Surabaya', '67890', 'Surabaya', '1995-05-10', '28', '0987654321', '2', '082345678901', 'S1 Akuntansi', 'Karyawan BUMN', '2022-02-15', '500000.00', '5000'),
-('AG003', 'utuututu', 'tutut', 'ututut', 'ututu', 'tutu', '2023-05-18', 'uyuyu', 'yuyu', '1', 'yuy', 'uyuyu', 'yu', '2023-05-17', '500000.00', '10000');
+('awdawd', 'wdwad', 'awdawd', 'awdawd', 'awd', 'awdawd', '2023-08-16', 'e', 'e', '1', 'e', 'e', 'e', '2023-08-23', '0.00', '0'),
+('r', 'r', 'r', 'r', 'r', 'r', '2023-08-09', 'r', 'r', '1', 'r', 'r', 'r', '2023-08-25', '0.00', '0'),
+('w', 'w', 'w', 'w', 'w', 'w', '2023-08-10', 'w', 'w', '1', 'w', 'w', 'w', '2023-08-08', '0.00', '0');
 
 -- --------------------------------------------------------
 
@@ -74,7 +77,7 @@ CREATE TABLE `angsuran` (
   `Denda` decimal(10,2) DEFAULT NULL,
   `Total_bayar` decimal(10,2) DEFAULT NULL,
   `Sisa_pinjaman_akhir` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `angsuran`
@@ -93,7 +96,7 @@ INSERT INTO `angsuran` (`ID_angsuran`, `ID_pinjaman`, `No_anggota`, `Nama_anggot
 CREATE TABLE `bantu_keterangan` (
   `ID` varchar(20) NOT NULL,
   `Keterangan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `bantu_keterangan`
@@ -112,7 +115,7 @@ INSERT INTO `bantu_keterangan` (`ID`, `Keterangan`) VALUES
 CREATE TABLE `jenis_kelamin` (
   `ID` varchar(20) NOT NULL,
   `Jenis_kelamin` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jenis_kelamin`
@@ -139,7 +142,7 @@ CREATE TABLE `karyawan` (
   `Umur` varchar(20) DEFAULT NULL,
   `Status_karyawan` varchar(50) DEFAULT NULL,
   `No_telepon` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `karyawan`
@@ -159,7 +162,7 @@ CREATE TABLE `kas` (
   `No_akun_kas` varchar(20) NOT NULL,
   `Keterangan_kas` varchar(255) DEFAULT NULL,
   `Saldo_kas_simpanan` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kas`
@@ -188,13 +191,14 @@ CREATE TABLE `pinjaman` (
   `Bunga/Tahun` decimal(10,0) NOT NULL,
   `Bunga/Bulan` decimal(10,0) NOT NULL,
   `jumlah_angsuran` decimal(10,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pinjaman`
 --
 
 INSERT INTO `pinjaman` (`ID_pinjaman`, `No_anggota`, `NIK`, `No_akun_piutang`, `Tanggal_pengaju`, `Tanggal_otorisasi`, `Besar_pinjaman`, `Jangka_waktu`, `Angsuran_pokok`, `Bunga/Tahun`, `Bunga/Bulan`, `jumlah_angsuran`) VALUES
+('123', '2113', '1234567890', 'PU003', '2023-08-10', '2023-08-23', '2.00', '2', '2', '2', '2', '2'),
 ('PIN001', 'AG001', '1234567890', 'PU001', '2023-05-19', '2023-05-20', '1000000.00', '12', '100000', '10', '1', '12'),
 ('PIN002', 'AG002', '0987654321', 'PU002', '2023-05-19', '2023-05-20', '500000.00', '6', '100000', '8', '0', '6');
 
@@ -208,7 +212,7 @@ CREATE TABLE `piutang` (
   `No_akun_piutang` varchar(20) NOT NULL,
   `Keterangan` varchar(255) DEFAULT NULL,
   `Saldo_piutang_anggota` decimal(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `piutang`
@@ -216,7 +220,8 @@ CREATE TABLE `piutang` (
 
 INSERT INTO `piutang` (`No_akun_piutang`, `Keterangan`, `Saldo_piutang_anggota`) VALUES
 ('PU001', 'Piutang Anggota A', '5000.00'),
-('PU002', 'Piutang Anggota B', '10000.00');
+('PU002', 'Piutang Anggota B', '10000.00'),
+('PU003', 'angsuran c', '1000.00');
 
 -- --------------------------------------------------------
 
@@ -235,15 +240,14 @@ CREATE TABLE `simpanan` (
   `Setoran` decimal(10,2) DEFAULT NULL,
   `Penarikan` decimal(10,2) DEFAULT NULL,
   `Keterangan_simpanan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `simpanan`
 --
 
 INSERT INTO `simpanan` (`ID_simpanan`, `No_anggota`, `Nama_anggota`, `Tgl_simpanan`, `NIK`, `Nama_karyawan`, `No_akun_kas`, `Setoran`, `Penarikan`, `Keterangan_simpanan`) VALUES
-('SIM001', 'AG001', 'John Doe', '2023-05-19', '1234567890', 'John Doe', 'KAS001', '500000.00', '0.00', 'KET001'),
-('SIM002', 'AG002', 'Jany Romince', '2023-05-19', '0987654321', 'Jane Smith', 'KAS001', '0.00', '100000.00', 'KET002');
+('123', 'AG001', NULL, '2023-08-09', '1234567890', NULL, 'KAS001', '2.00', '2.00', 'KET001');
 
 -- --------------------------------------------------------
 
@@ -254,7 +258,7 @@ INSERT INTO `simpanan` (`ID_simpanan`, `No_anggota`, `Nama_anggota`, `Tgl_simpan
 CREATE TABLE `status_karyawan` (
   `ID` varchar(20) NOT NULL,
   `Status_karyawan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `status_karyawan`
