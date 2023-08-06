@@ -1,0 +1,241 @@
+<?php
+    $conn = mysqli_connect("localhost", "root", "", "koperasi");
+
+    function inputDataAnggota($data) {
+        global $conn;
+
+        // Mendapatkan data dari form
+        $No_anggota = $data['No_anggota'];
+        $Nama_anggota = $data['Nama_anggota'];
+        $Alamat = $data['Alamat'];
+        $Kota = $data['Kota'];
+        $Kode_pos = $data['Kode_pos'];
+        $Tempat_lahir = $data['Tempat_lahir'];
+        $Tanggal_lahir = $data['Tanggal_lahir'];
+        $Umur = $data['Umur'];
+        $No_KTP = $data['No_KTP'];
+        $Jenis_kelamin = $data['Jenis_kelamin'];
+        $Telepon = $data['Telepon'];
+        $Pendidikan = $data['Pendidikan'];
+        $Pekerjaan_Jabatan = $data['Pekerjaan_Jabatan'];
+        $Tanggal_masuk = $data['Tanggal_masuk'];
+        $Simpanan_pokok = $data['Simpanan_pokok'];
+        $smk = $data['smk'];
+
+        // Memasukkan data anggota ke tabel
+        $query = "INSERT INTO anggota (No_anggota, Nama_anggota, Alamat, Kota, Kode_pos, Tempat_lahir, Tanggal_lahir, Umur, No_KTP, Jenis_kelamin, Telepon, Pendidikan, Pekerjaan_Jabatan, Tanggal_masuk, Simpanan_pokok, smk) 
+                VALUES 
+                    ('$No_anggota', '$Nama_anggota', '$Alamat', '$Kota', '$Kode_pos', '$Tempat_lahir', '$Tanggal_lahir', '$Umur', '$No_KTP', '$Jenis_kelamin', '$Telepon', '$Pendidikan', '$Pekerjaan_Jabatan', '$Tanggal_masuk', '$Simpanan_pokok', '$smk')
+                ";
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function inputDataKaryawan($data) {
+        global $conn;
+
+        // Mendapatkan data dari form
+        $NIK = $data['NIK'];
+        $Nama_karyawan = $data['Nama_karyawan'];
+        $Alamat = $data['Alamat'];
+        $Kota = $data['Kota'];
+        $Kode_pos = $data['Kode_pos'];
+        $Tempat_lahir = $data['Tempat_lahir'];
+        $Tanggal_lahir = $data['Tanggal_lahir'];
+        $Umur = $data['Umur'];
+        $Status_karyawan = $data['Status_karyawan'];
+        $No_telepon = $data['No_telepon'];
+
+        // Memasukkan data karyawan ke tabel
+        $query = "INSERT INTO karyawan (NIK, Nama_karyawan, Alamat, Kota, Kode_pos, Tempat_lahir, Tanggal_lahir, Umur, Status_karyawan, No_telepon) 
+                VALUES 
+                    ('$NIK', '$Nama_karyawan', '$Alamat', '$Kota', '$Kode_pos', '$Tempat_lahir', '$Tanggal_lahir', '$Umur', '$Status_karyawan', '$No_telepon')
+                ";
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function generateKeteranganOptions() {
+        global $conn;
+        $options = "";
+
+        $query = "SELECT * FROM bantu_keterangan";
+        $result = mysqli_query($conn, $query);
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $options .= "<option value='" . $row['ID'] . "'>" . $row['Keterangan'] . "</option>";
+        }
+
+        return $options;
+    }
+
+    function sTransaksiSimpanan($data) {
+        global $conn;
+
+        $ID_simpanan = $data['ID_simpanan'];
+        $No_anggota = $data['No_anggota'];
+        $Tgl_simpanan = $data['Tgl_simpanan'];
+        $NIK = $data['NIK'];
+        $No_akun_kas = $data['No_akun_kas'];
+        $Setoran = $data['Setoran'];
+        $Penarikan = $data['Penarikan'];
+        $Keterangan_simpanan = $data['Keterangan_simpanan'];
+
+        $query = "INSERT INTO simpanan (ID_simpanan, No_anggota, Tgl_simpanan, NIK, No_akun_kas, Setoran, Penarikan, Keterangan_simpanan) 
+                VALUES 
+                    ('$ID_simpanan', '$No_anggota', '$Tgl_simpanan', '$NIK', '$No_akun_kas', '$Setoran', '$Penarikan', '$Keterangan_simpanan')
+                ";
+
+        $result = mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
+
+    function sTransaksiPinjaman($data) {
+        global $conn;
+
+        $ID_pinjaman = $_POST['ID_pinjaman'];
+        $No_anggota = $_POST['No_anggota'];
+        $NIK = $_POST['NIK'];
+        $No_akun_piutang = $_POST['No_akun_piutang'];
+        $Tanggal_pengaju = $_POST['Tanggal_pengaju'];
+        $Tanggal_otorisasi = $_POST['Tanggal_otorisasi'];
+        $Besar_pinjaman = $_POST['Besar_pinjaman'];
+        $Jangka_waktu = $_POST['Jangka_waktu'];
+        $Angsuran_pokok = $_POST['Angsuran_pokok'];
+        $Bunga_per_tahun = $_POST['Bunga_per_tahun'];
+        $Bunga_per_bulan = $_POST['Bunga_per_bulan'];
+        $jumlah_angsuran = $_POST['jumlah_angsuran'];
+
+        $query = "INSERT INTO pinjaman (ID_pinjaman, No_anggota, NIK, No_akun_piutang, Tanggal_pengaju, Tanggal_otorisasi, Besar_pinjaman, Jangka_waktu, Angsuran_pokok, `Bunga/Tahun`, `Bunga/Bulan`, jumlah_angsuran) 
+                VALUES 
+                    ('$ID_pinjaman', '$No_anggota', '$NIK', '$No_akun_piutang', '$Tanggal_pengaju', '$Tanggal_otorisasi', '$Besar_pinjaman', '$Jangka_waktu', '$Angsuran_pokok', '$Bunga_per_tahun', '$Bunga_per_bulan', '$jumlah_angsuran')
+                ";
+
+        $result = mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
+
+    function sTransaksiAngsuran($data) {
+        global $conn;
+
+        $ID_angsuran = $data['ID_angsuran'];
+        $ID_pinjaman = $data['ID_pinjaman'];
+        $No_anggota = $data['No_anggota'];
+        $Nama_anggota = $data['Nama_anggota'];
+        $NIK = $data['NIK'];
+        $Tanggal_angsuran = $data['Tanggal_angsuran'];
+        $Tanggal_bayar = $data['Tanggal_bayar'];
+        $Angsuran_ke = $data['Angsuran_ke'];
+        $Jumlah_angsuran = $data['Jumlah_angsuran'];
+        $Denda = $data['Denda'];
+        $Total_bayar = $data['Total_bayar'];
+        $Sisa_pinjaman_akhir = $data['Sisa_pinjaman_akhir'];
+
+        $query = "INSERT INTO angsuran (ID_angsuran, ID_pinjaman, No_anggota, Nama_anggota, NIK, Tanggal_angsuran, Tanggal_bayar, Angsuran_ke, Jumlah_angsuran, Denda, Total_bayar, Sisa_pinjaman_akhir) 
+                VALUES 
+                    ('$ID_angsuran', '$ID_pinjaman', '$No_anggota', '$Nama_anggota', '$NIK', '$Tanggal_angsuran', '$Tanggal_bayar', '$Angsuran_ke', '$Jumlah_angsuran', '$Denda', '$Total_bayar', '$Sisa_pinjaman_akhir')
+                ";
+
+        $result = mysqli_query($conn, $query);
+        return mysqli_affected_rows($conn);
+    }
+
+    function tampilData($query) {
+        global $conn;
+        
+        $result = mysqli_query($conn, $query);
+        $kotak = [];
+        while( $box = mysqli_fetch_assoc($result) ){
+            $kotak[] = $box;
+        }
+        return $kotak;
+    }
+
+    function pinjamanAnggota() {
+        $host = 'localhost';
+        $db   = 'koperasi';
+        $user = 'root';
+        $pass = '';
+
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+    
+        try {
+            $pdo = new PDO($dsn, $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+            $query = "SELECT p.ID_pinjaman, p.No_anggota, p.NIK, p.No_akun_piutang, p.Tanggal_pengaju, p.Tanggal_otorisasi, p.Besar_pinjaman, p.Jangka_waktu, p.Angsuran_pokok, p.`Bunga/Tahun`, p.`Bunga/Bulan`, p.jumlah_angsuran, a.Nama_anggota, k.Nama_karyawan
+                    FROM pinjaman p
+                    LEFT JOIN anggota a ON p.No_anggota = a.No_anggota
+                    LEFT JOIN karyawan k ON p.NIK = k.NIK
+                    ORDER BY p.ID_pinjaman DESC";
+    
+            $pinjaman = tampilData($query);
+    
+            return $pinjaman;
+    
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    function simpananAnggota() {
+        $host = 'localhost';
+        $db   = 'koperasi';
+        $user = 'root';
+        $pass = '';
+
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+
+        try {
+            $pdo = new PDO($dsn, $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "SELECT s.ID_simpanan, s.No_anggota, a.Nama_anggota, s.Tgl_simpanan, s.Keterangan_simpanan, s.Penarikan
+                    FROM simpanan s
+                    LEFT JOIN anggota a ON s.No_anggota = a.No_anggota
+                    ORDER BY s.ID_simpanan DESC
+                    ";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $simpananAnggota = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $pdo = null;
+
+            return $simpananAnggota;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
+
+    function AngsuranData() {
+        $host = 'localhost';
+        $db   = 'koperasi';
+        $user = 'root';
+        $pass = '';
+
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+
+        try {
+            $pdo = new PDO($dsn, $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "SELECT a.ID_angsuran, a.ID_pinjaman, a.No_anggota, a.Nama_anggota, a.NIK, a.Tanggal_angsuran, a.Tanggal_bayar, a.Angsuran_ke, a.Jumlah_angsuran, a.Denda, a.Total_bayar, a.Sisa_pinjaman_akhir
+                    FROM angsuran a
+                    LEFT JOIN pinjaman p ON a.ID_pinjaman = p.ID_pinjaman";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $angsuran = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $angsuran;
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+
+?>

@@ -1,0 +1,20 @@
+.table {
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Ganti nilai 10px sesuai dengan jarak yang diinginkan */
+}
+
+.table th,
+.table td {
+    padding: 10px;
+}
+
+.error-message{
+    color: #e74c3c;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.action-links a.delete-link {
+    color: #f44336;
+    text-decoration: none;
+}
