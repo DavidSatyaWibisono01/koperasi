@@ -6,12 +6,12 @@
         if( inputDataAnggota($_POST) > 0 ){
             echo "<script>
                     alert('data berhasil ditambahkan');
-                    document.location.href = '../../home.php';
+                    document.location.href = 'laporan_anggota.php';
                 </script>";
             }else{
                 echo "<script>
                         alert('data gagal ditambahkan');
-                        document.location.href = '../../home.php';
+                        document.location.href = 'laporan_anggota.php';
                     </script>";
             }
         }

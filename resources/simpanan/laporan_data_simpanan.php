@@ -18,6 +18,10 @@
 <body>
     <div class="container">
         <h2 class="mb-4">Laporan Data Simpanan</h2>
+        <div class="text-right mt-4">
+            <a href="export.php" class="btn btn-success">Export Excel</a>
+            <a href="form_transaksi_simpanan.php" class="btn btn-primary">Tambah Data</a>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead class="thead-light">
@@ -52,8 +56,9 @@
             </table>
         </div>
         <div class="mt-4">
-            <p>Total Jumlah Simpanan: <?= number_format($totalJumlahSimpanan, 2); ?></p>
+            <p>Total Jumlah Simpanan: Rp. <?= number_format($totalJumlahSimpanan, 2); ?></p>
         </div>
+        <a href="../../home.php" class="btn">Keluar</a>
     </div>
 </body>
 </html>

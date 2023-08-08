@@ -20,6 +20,10 @@
 <body>
     <div class="container">
         <h2 class="mb-4">Laporan Data Pinjaman</h2>
+        <div class="text-right mt-4">
+            <a href="export.php" class="btn btn-success">Export Excel</a>
+            <a href="form_transaksi_pinjaman.php" class="btn btn-primary">Tambah Data</a>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead class="thead-light">
@@ -58,9 +62,10 @@
             </table>
         </div>
         <div class="mt-4">
-            <p>Total Jumlah Pinjaman: <?= number_format($totalJumlahPinjaman, 2); ?></p>
+            <p>Total Jumlah Pinjaman: Rp. <?= number_format($totalJumlahPinjaman, 2); ?></p>
             <p>Total Jumlah Angsuran: <?= number_format($totalJumlahAngsuran); ?> Bulan</p>
         </div>
+        <a href="../../home.php" class="btn">Keluar</a>
     </div>
 </body>
 </html>

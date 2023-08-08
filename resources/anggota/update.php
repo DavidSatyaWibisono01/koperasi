@@ -9,12 +9,12 @@
         
         if( updateAnggota($_POST) > 0 ){
             echo "<script>
-                    alert('data berhasil diubah!');
-                    document.location.href = 'laporan_anggota.php';
-                </script>";
+            alert('data gagal diubah!');
+            document.location.href = 'laporan_anggota.php';
+            </script>";
         }else{
             echo "<script>
-                    alert('data gagal diubah!');
+                    alert('data berhasil diubah!');
                     document.location.href = 'laporan_anggota.php';
                 </script>";
         }

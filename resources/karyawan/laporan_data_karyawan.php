@@ -16,6 +16,10 @@
             <div class="card" style="width: 70rem;">
                 <div class="card-body"> 
                     <h2 class="mb-4">Laporan Data Anggota Koperasi</h2>
+                    <div class="text-right mt-4">
+                        <a href="export.php" class="btn btn-success">Export Excel</a>
+                        <a href="form_karyawan.php" class="btn btn-primary">Tambah Data</a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-light">
@@ -59,6 +63,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <a href="../../home.php" class="btn">Keluar</a>
                 </div>
             </div>
         </div>
