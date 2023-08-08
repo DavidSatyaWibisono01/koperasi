@@ -21,6 +21,10 @@
 <body>
     <div class="container">
         <h2 class="mb-4">Laporan Data Angsuran</h2>
+        <div class="text-right mt-4">
+            <a href="export.php" class="btn btn-success">Export Excel</a>
+            <a href="form_transaksi_angsuran.php" class="btn btn-primary">Tambah Data</a>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead class="thead-light">
@@ -72,6 +76,7 @@
             <p>Total Jumlah Pinjaman: Rp. <?= number_format($sisaJumlahAngsuran, 2); ?></p>
             <p>Total Jumlah Angsuran: <?= number_format($totalJumlahAngsuran); ?>Bulan</p>
         </div>
+        <a href="../../home.php" class="btn">Keluar</a>
     </div>
 </body>
 </html>

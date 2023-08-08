@@ -451,4 +451,40 @@
         }
     }
 
+    function getConnection() {
+        $host = 'localhost';
+        $db   = 'koperasi';
+        $user = 'root';
+        $pass = '';
+
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+
+        try {
+            $pdo = new PDO($dsn, $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+        } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+            return null;
+        }
+    }
+
+    function getKasData() {
+        $pdo = getConnection();
+
+        if ($pdo) {
+            try {
+                $sql = "SELECT No_akun_kas, Keterangan_kas, Saldo_kas_simpanan FROM kas";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                return [];
+            }
+        }
+        return [];
+    }
+
+
 ?>

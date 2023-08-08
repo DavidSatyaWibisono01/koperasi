@@ -42,6 +42,10 @@
                     <?php if (isset($error)) : ?>
                         <p class="error-message">Maaf, ID dengan nomor <?= $ID_angsuran?> sudah tersedia. Silahkan input dengan ID yg berbeda!</p>
                     <?php endif; ?> 
+                    <div class="text-right mt-4">
+                        <a href="export.php" class="btn btn-success">Export Excel</a>
+                        <a href="form_transaksi_pinjaman.php" class="btn btn-primary">Tambah Data</a>
+                    </div>
                     <form method="post" action="">
                         <div class="form-group">
                             <label for="ID_angsuran">ID Angsuran:</label>

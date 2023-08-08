@@ -28,7 +28,7 @@
           <li class="list-group-item"><a href="resources/simpanan/laporan_data_simpanan.php">Laporan Data Simpanan Anggota</a></li>
           <li class="list-group-item"><a href="resources/pinjaman/laporan_data_pinjaman.php">Laporan Data Pinjaman Anggota</a></li>
           <li class="list-group-item"><a href="resources/piutang/laporan_data_piutang.php">Laporan Data Piutang</a></li>
-          <li class="list-group-item"><a href="resources/laporan_saldo_kas.php">Laporan Saldo Kas</a></li>
+          <li class="list-group-item"><a href="resources/kas/laporan_saldo_kas.php">Laporan Saldo Kas</a></li>
           <li class="list-group-item"><a href="resources/angsuran/laporan_data_angsuran.php">Laporan Data Angsuran</a></li>
         </ul>
       </div>
