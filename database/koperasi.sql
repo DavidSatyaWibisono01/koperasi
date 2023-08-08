@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2023 at 10:43 AM
+-- Generation Time: Aug 08, 2023 at 02:20 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.0.19
 
@@ -51,12 +51,14 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`No_anggota`, `Nama_anggota`, `Alamat`, `Kota`, `Kode_pos`, `Tempat_lahir`, `Tanggal_lahir`, `Umur`, `No_KTP`, `Jenis_kelamin`, `Telepon`, `Pendidikan`, `Pekerjaan_Jabatan`, `Tanggal_masuk`, `Simpanan_pokok`, `smk`) VALUES
-('2113', 'asd', 'asd', 'asd', '234', 'asd', '2023-08-16', '34', '234', '1', '2324', 'asda', 'sdasd', '2023-08-14', '0.00', '0'),
+('111111', 'w', 'w', 'w', 'w', 'w', '2023-08-18', 'w', 'w', '2', 'w', 'w', 'w', '2023-08-22', '6.00', '6'),
+('2113', 'wdawdawdadawda', 'asd', 'asd', '234', 'asd', '2023-08-16', '34', '234', '1', '2324', 'asda', 'sdasd', '2023-08-14', '0.00', '0'),
+('4', '4', '4', '4', '4', '4', '2023-08-10', '4', '4', '1', '4', '4', '4', '2023-08-24', '4.00', '4'),
+('8', '978', '', '8777', '8', '87', '2003-07-31', '98', '7', '1', '987', '98', '79', '2023-09-02', '987.00', '987'),
 ('AG001', 'John Doe', 'Jalan ABC No. 123', 'Jakarta', '12345', 'Jakarta', '1990-01-01', '33', '1234567890', '1', '081234567890', 'S1 Teknik Informatika', 'Pegawai Swasta', '2022-01-01', '1000000.00', '10000'),
 ('AG002', 'Jany Romince', 'Jalan XYZ No. 456', 'Surabaya', '67890', 'Surabaya', '1995-05-10', '28', '0987654321', '2', '082345678901', 'S1 Akuntansi', 'Karyawan BUMN', '2022-02-15', '500000.00', '5000'),
-('awdawd', 'wdwad', 'awdawd', 'awdawd', 'awd', 'awdawd', '2023-08-16', 'e', 'e', '1', 'e', 'e', 'e', '2023-08-23', '0.00', '0'),
-('r', 'r', 'r', 'r', 'r', 'r', '2023-08-09', 'r', 'r', '1', 'r', 'r', 'r', '2023-08-25', '0.00', '0'),
-('w', 'w', 'w', 'w', 'w', 'w', '2023-08-10', 'w', 'w', '1', 'w', 'w', 'w', '2023-08-08', '0.00', '0');
+('e', 'e', 'e', 'e', 'e', 'e', '2023-08-30', 'e', 'e', '1', 'e', 'e', 'e', '2023-08-15', '67.00', '67'),
+('f', 'f', 'f', 'f', 'f', 'f', '2023-08-03', 'f', 'f', '1', 'f', 'f', 'f', '2023-09-07', '0.00', '0');
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,8 @@ CREATE TABLE `angsuran` (
 
 INSERT INTO `angsuran` (`ID_angsuran`, `ID_pinjaman`, `No_anggota`, `Nama_anggota`, `NIK`, `Tanggal_angsuran`, `Tanggal_bayar`, `Angsuran_ke`, `Jumlah_angsuran`, `Denda`, `Total_bayar`, `Sisa_pinjaman_akhir`) VALUES
 ('ANS001', 'PIN001', 'AG001', 'John Doe', '1234567890', '2023-05-19', '2023-05-20', '1', '100000.00', '0.00', '100000.00', '900000.00'),
-('ANS002', 'PIN002', 'AG002', 'Jany Romince', '0987654321', '2023-05-19', '2023-05-20', '1', '100000.00', '0.00', '100000.00', '400000.00');
+('ANS002', 'PIN002', 'AG002', 'Jany Romince', '0987654321', '2023-05-19', '2023-05-20', '1', '100000.00', '0.00', '100000.00', '400000.00'),
+('ANS003', '123', '2113', 'wdawdawdadawda', '1234567890', '2023-08-25', '2023-08-18', '83', '2000.00', '5000.00', '5000.00', '5.00');
 
 -- --------------------------------------------------------
 
@@ -150,6 +153,8 @@ CREATE TABLE `karyawan` (
 
 INSERT INTO `karyawan` (`NIK`, `Nama_karyawan`, `Alamat`, `Kota`, `Kode_pos`, `Tempat_lahir`, `Tanggal_lahir`, `Umur`, `Status_karyawan`, `No_telepon`) VALUES
 ('0987654321', 'Jane Smith', 'Jl. Contoh Alamat Lain', 'Kota Lain', '54321', 'Tempat Lahir Lain', '1985-05-10', '38', 'ST002', '087654321098'),
+('1111111111111111111', 'ddddd', 'e', 'e', 'e', 'e', '2023-08-11', 'e', 'ST001', 'e'),
+('123', '123', '123', '123', '123', '23', '2023-08-17', '21', 'ST001', '321'),
 ('1234567890', 'John Doe', 'Jl. Contoh Alamat', 'Kota Contoh', '12345', 'Tempat Lahir', '1990-01-01', '33', 'ST001', '081234567890');
 
 -- --------------------------------------------------------
@@ -170,7 +175,8 @@ CREATE TABLE `kas` (
 
 INSERT INTO `kas` (`No_akun_kas`, `Keterangan_kas`, `Saldo_kas_simpanan`) VALUES
 ('KAS001', 'Penerimaan Simpanan', '1000.00'),
-('KAS002', 'Pengeluaran Biaya Administrasi', '-500.00');
+('KAS002', 'Pengeluaran Biaya Administrasi', '-500.00'),
+('KAS003', 'asu', '50000.00');
 
 -- --------------------------------------------------------
 
@@ -198,6 +204,7 @@ CREATE TABLE `pinjaman` (
 --
 
 INSERT INTO `pinjaman` (`ID_pinjaman`, `No_anggota`, `NIK`, `No_akun_piutang`, `Tanggal_pengaju`, `Tanggal_otorisasi`, `Besar_pinjaman`, `Jangka_waktu`, `Angsuran_pokok`, `Bunga/Tahun`, `Bunga/Bulan`, `jumlah_angsuran`) VALUES
+('11111111111', 'AG001', '1234567890', 'PU001', '2023-09-01', '2023-08-10', '1111.00', '111', '111', '1', '1', '123'),
 ('123', '2113', '1234567890', 'PU003', '2023-08-10', '2023-08-23', '2.00', '2', '2', '2', '2', '2'),
 ('PIN001', 'AG001', '1234567890', 'PU001', '2023-05-19', '2023-05-20', '1000000.00', '12', '100000', '10', '1', '12'),
 ('PIN002', 'AG002', '0987654321', 'PU002', '2023-05-19', '2023-05-20', '500000.00', '6', '100000', '8', '0', '6');
@@ -247,7 +254,8 @@ CREATE TABLE `simpanan` (
 --
 
 INSERT INTO `simpanan` (`ID_simpanan`, `No_anggota`, `Nama_anggota`, `Tgl_simpanan`, `NIK`, `Nama_karyawan`, `No_akun_kas`, `Setoran`, `Penarikan`, `Keterangan_simpanan`) VALUES
-('123', 'AG001', NULL, '2023-08-09', '1234567890', NULL, 'KAS001', '2.00', '2.00', 'KET001');
+('1111111', 'AG001', NULL, '2023-08-08', '1234567890', NULL, 'KAS001', '234.00', '234.00', 'KET001'),
+('123', 'AG001', NULL, '2023-08-09', '1234567890', NULL, 'KAS002', '5.00', '5.00', 'KET001');
 
 -- --------------------------------------------------------
 
