@@ -4,7 +4,6 @@
     function inputDataAnggota($data) {
         global $conn;
 
-        // Mendapatkan data dari form
         $No_anggota = $data['No_anggota'];
         $Nama_anggota = $data['Nama_anggota'];
         $Alamat = $data['Alamat'];
@@ -22,7 +21,6 @@
         $Simpanan_pokok = $data['Simpanan_pokok'];
         $smk = $data['smk'];
 
-        // Memasukkan data anggota ke tabel
         $query = "INSERT INTO anggota (No_anggota, Nama_anggota, Alamat, Kota, Kode_pos, Tempat_lahir, Tanggal_lahir, Umur, No_KTP, Jenis_kelamin, Telepon, Pendidikan, Pekerjaan_Jabatan, Tanggal_masuk, Simpanan_pokok, smk) 
                 VALUES 
                     ('$No_anggota', '$Nama_anggota', '$Alamat', '$Kota', '$Kode_pos', '$Tempat_lahir', '$Tanggal_lahir', '$Umur', '$No_KTP', '$Jenis_kelamin', '$Telepon', '$Pendidikan', '$Pekerjaan_Jabatan', '$Tanggal_masuk', '$Simpanan_pokok', '$smk')
@@ -35,7 +33,6 @@
     function inputDataKaryawan($data) {
         global $conn;
 
-        // Mendapatkan data dari form
         $NIK = $data['NIK'];
         $Nama_karyawan = $data['Nama_karyawan'];
         $Alamat = $data['Alamat'];
@@ -47,7 +44,6 @@
         $Status_karyawan = $data['Status_karyawan'];
         $No_telepon = $data['No_telepon'];
 
-        // Memasukkan data karyawan ke tabel
         $query = "INSERT INTO karyawan (NIK, Nama_karyawan, Alamat, Kota, Kode_pos, Tempat_lahir, Tanggal_lahir, Umur, Status_karyawan, No_telepon) 
                 VALUES 
                     ('$NIK', '$Nama_karyawan', '$Alamat', '$Kota', '$Kode_pos', '$Tempat_lahir', '$Tanggal_lahir', '$Umur', '$Status_karyawan', '$No_telepon')
@@ -242,32 +238,6 @@
         }
     }
     
-    function deleteAnggota($noAnggota) {
-        // Melakukan koneksi ke database (ganti sesuai dengan konfigurasi database Anda)
-        $host = 'localhost';
-        $db   = 'koperasi';
-        $user = 'root';
-        $pass = '';
-
-        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
-
-        try {
-            $pdo = new PDO($dsn, $user, $pass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // Menghapus data anggota berdasarkan No_anggota
-            $sql = "DELETE FROM anggota WHERE No_anggota = :noAnggota";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':noAnggota', $noAnggota, PDO::PARAM_STR);
-            $stmt->execute();
-        } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-
-        // Menutup koneksi database
-        $pdo = null;
-    }
-    
     function updateAnggota($data) {
         global $conn;
 
@@ -289,25 +259,37 @@
         $smk = $data['smk'];
 
         $query = "UPDATE anggota SET 
-                    Nama_anggota = '$Nama_anggota', 
-                    Alamat = '$Alamat', 
-                    Kota = '$Kota', 
-                    Kode_pos = '$Kode_pos', 
-                    Tempat_lahir = '$Tempat_lahir', 
+                    Nama_anggota = '$Nama_anggota',
+                    Alamat = '$Alamat',
+                    Kota = '$Kota',
+                    Kode_pos = '$Kode_pos',
+                    Tempat_lahir = '$Tempat_lahir',
                     Tanggal_lahir = '$Tanggal_lahir',
-                    Umur = '$Umur', 
-                    No_KTP = '$No_KTP', 
-                    Jenis_kelamin = '$Jenis_kelamin', 
-                    Telepon = '$Telepon', 
-                    Pendidikan = '$Pendidikan', 
-                    Pekerjaan_Jabatan = '$Pekerjaan_Jabatan', 
-                    Tanggal_masuk = '$Tanggal_masuk', 
-                    Simpanan_pokok = '$Simpanan_pokok', 
+                    Umur = '$Umur',
+                    No_KTP = '$No_KTP',
+                    Jenis_kelamin = '$Jenis_kelamin',
+                    Telepon = '$Telepon',
+                    Pendidikan = '$Pendidikan',
+                    Pekerjaan_Jabatan = '$Pekerjaan_Jabatan',
+                    Tanggal_masuk = '$Tanggal_masuk',
+                    Simpanan_pokok = '$Simpanan_pokok',
                     smk = '$smk'
                 WHERE No_anggota = $No_anggota
         ";
+        echo $query;
         $result = mysqli_query($conn, $query);
+        if (!$result) {
+            die('Kesalahan query: ' . mysqli_error($conn));
+        }
+        return mysqli_affected_rows($conn);
+    }
 
+    function hapusAnggota($id) {
+        global $conn;
+    
+        $query = "DELETE FROM anggota WHERE No_anggota = '$id'";
+        $result = mysqli_query($conn, $query);
+    
         return mysqli_affected_rows($conn);
     }
     

@@ -5,6 +5,7 @@
     $anggota = tampilData("SELECT * FROM anggota WHERE No_anggota = '$id'");
     
     if( isset($_POST["submit"]) ){
+        print_r($_POST);
         
         if( updateAnggota($_POST) > 0 ){
             echo "<script>
@@ -32,7 +33,7 @@
 <head>
     <title>Ubah Data Anggota</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
     <div class="container">

@@ -8,7 +8,7 @@
 <head>
     <title>Laporan Anggota</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
     <div class="container">
@@ -20,7 +20,7 @@
                         <a href="export.php" class="btn btn-success">Export Excel</a>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-responsive">
                             <thead class="thead-light">
                                 <tr>
                                     <th>No.</th>
@@ -59,7 +59,7 @@
                                         <td><?= $anggota["Simpanan_pokok"] ?></td>
                                         <td><?= $anggota["smk"] ?></td>
                                         <td class="action-links">
-                                            <a href='delete.php?no_anggota="<?= $anggota["No_anggota"] ?>"' class="delete-link">Hapus</a>
+                                            <a href='delete.php?id="<?= $anggota["No_anggota"] ?>"' class="delete-link">Hapus</a>
                                             <a href="update.php?id=<?= $anggota["No_anggota"] ?>" class="update-link">Ubah</a>
                                         </td>
                                     </tr>
