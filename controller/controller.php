@@ -424,4 +424,31 @@
         return mysqli_affected_rows($conn);
     }
 
+    function getPiutangData() {
+        $host = 'localhost';
+        $db   = 'koperasi';
+        $user = 'root';
+        $pass = '';
+    
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+    
+        try {
+            $pdo = new PDO($dsn, $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+            $sql = "SELECT No_akun_piutang, Keterangan, Saldo_piutang_anggota FROM piutang";
+    
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $piutang = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $piutang;
+    
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $pdo = null;
+        }
+    }
+
 ?>
