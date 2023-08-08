@@ -146,12 +146,17 @@
         global $conn;
         
         $result = mysqli_query($conn, $query);
+        if (!$result) {
+            die("Query error: " . mysqli_error($conn));
+        }
+        
         $kotak = [];
-        while( $box = mysqli_fetch_assoc($result) ){
+        while ($box = mysqli_fetch_assoc($result)) {
             $kotak[] = $box;
         }
         return $kotak;
     }
+    
 
     function pinjamanAnggota() {
         $host = 'localhost';
@@ -236,6 +241,205 @@
             echo "Error: " . $e->getMessage();
         }
     }
+    
+    function deleteAnggota($noAnggota) {
+        // Melakukan koneksi ke database (ganti sesuai dengan konfigurasi database Anda)
+        $host = 'localhost';
+        $db   = 'koperasi';
+        $user = 'root';
+        $pass = '';
 
+        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+
+        try {
+            $pdo = new PDO($dsn, $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Menghapus data anggota berdasarkan No_anggota
+            $sql = "DELETE FROM anggota WHERE No_anggota = :noAnggota";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':noAnggota', $noAnggota, PDO::PARAM_STR);
+            $stmt->execute();
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+        // Menutup koneksi database
+        $pdo = null;
+    }
+    
+    function updateAnggota($data) {
+        global $conn;
+
+        $No_anggota = $data['No_anggota'];
+        $Nama_anggota = $data['Nama_anggota'];
+        $Alamat = $data['Alamat'];
+        $Kota = $data['Kota'];
+        $Kode_pos = $data['Kode_pos'];
+        $Tempat_lahir = $data['Tempat_lahir'];
+        $Tanggal_lahir = $data['Tanggal_lahir'];
+        $Umur = $data['Umur'];
+        $No_KTP = $data['No_KTP'];
+        $Jenis_kelamin = $data['Jenis_kelamin'];
+        $Telepon = $data['Telepon'];
+        $Pendidikan = $data['Pendidikan'];
+        $Pekerjaan_Jabatan = $data['Pekerjaan_Jabatan'];
+        $Tanggal_masuk = $data['Tanggal_masuk'];
+        $Simpanan_pokok = $data['Simpanan_pokok'];
+        $smk = $data['smk'];
+
+        $query = "UPDATE anggota SET 
+                    Nama_anggota = '$Nama_anggota', 
+                    Alamat = '$Alamat', 
+                    Kota = '$Kota', 
+                    Kode_pos = '$Kode_pos', 
+                    Tempat_lahir = '$Tempat_lahir', 
+                    Tanggal_lahir = '$Tanggal_lahir',
+                    Umur = '$Umur', 
+                    No_KTP = '$No_KTP', 
+                    Jenis_kelamin = '$Jenis_kelamin', 
+                    Telepon = '$Telepon', 
+                    Pendidikan = '$Pendidikan', 
+                    Pekerjaan_Jabatan = '$Pekerjaan_Jabatan', 
+                    Tanggal_masuk = '$Tanggal_masuk', 
+                    Simpanan_pokok = '$Simpanan_pokok', 
+                    smk = '$smk'
+                WHERE No_anggota = $No_anggota
+        ";
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+    
+    function updateAngsuran($data) {
+        global $conn;
+
+        $ID_angsuran = $data['ID_angsuran'];
+        $ID_pinjaman = $data['ID_pinjaman'];
+        $No_anggota = $data['No_anggota'];
+        $Nama_anggota = $data['Nama_anggota'];
+        $NIK = $data['NIK'];
+        $Tanggal_angsuran = $data['Tanggal_angsuran'];
+        $Tanggal_bayar = $data['Tanggal_bayar'];
+        $Angsuran_ke = $data['Angsuran_ke'];
+        $Jumlah_angsuran = $data['Jumlah_angsuran'];
+        $Denda = $data['Denda'];
+        $Total_bayar = $data['Total_bayar'];
+        $Sisa_pinjaman_akhir = $data['Sisa_pinjaman_akhir'];
+
+        $query = "UPDATE angsuran SET
+                    ID_pinjaman = '$ID_pinjaman', 
+                    No_anggota = '$No_anggota', 
+                    Nama_anggota = '$Nama_anggota', 
+                    NIK = '$NIK', 
+                    Tanggal_angsuran = '$Tanggal_angsuran', 
+                    Tanggal_bayar = '$Tanggal_bayar', 
+                    Angsuran_ke = '$Angsuran_ke', 
+                    Jumlah_angsuran = '$Jumlah_angsuran', 
+                    Denda = '$Denda', 
+                    Total_bayar = '$Total_bayar', 
+                    Sisa_pinjaman_akhir = '$Sisa_pinjaman_akhir'
+                WHERE ID_angsuran = '$ID_angsuran'";
+
+
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function updateKaryawan($data) {
+        global $conn;
+
+        $NIK = $data['NIK'];
+        $Nama_karyawan = $data['Nama_karyawan'];
+        $Alamat = $data['Alamat'];
+        $Kota = $data['Kota'];
+        $Kode_pos = $data['Kode_pos'];
+        $Tempat_lahir = $data['Tempat_lahir'];
+        $Tanggal_lahir = $data['Tanggal_lahir'];
+        $Umur = $data['Umur'];
+        $Status_karyawan = $data['Status_karyawan'];
+        $No_telepon = $data['No_telepon'];
+
+        $query = "UPDATE karyawan SET
+                    Nama_karyawan = '$Nama_karyawan',
+                    Alamat = '$Alamat',
+                    Kota = '$Kota',
+                    Kode_pos = '$Kode_pos',
+                    Tempat_lahir = '$Tempat_lahir',
+                    Tanggal_lahir = '$Tanggal_lahir',
+                    Umur = '$Umur',
+                    Status_karyawan = '$Status_karyawan',
+                    No_telepon = '$No_telepon'
+                WHERE NIK = '$NIK'
+        ";
+
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function updatePinjaman($data) {
+        global $conn;
+
+        $ID_pinjaman = $_POST['ID_pinjaman'];
+        $No_anggota = $_POST['No_anggota'];
+        $NIK = $_POST['NIK'];
+        $No_akun_piutang = $_POST['No_akun_piutang'];
+        $Tanggal_pengaju = $_POST['Tanggal_pengaju'];
+        $Tanggal_otorisasi = $_POST['Tanggal_otorisasi'];
+        $Besar_pinjaman = $_POST['Besar_pinjaman'];
+        $Jangka_waktu = $_POST['Jangka_waktu'];
+        $Angsuran_pokok = $_POST['Angsuran_pokok'];
+        $Bunga_Tahun = $_POST['Bunga/Tahun'];
+        $Bunga_Bulan = $_POST['Bunga/Bulan'];
+        $jumlah_angsuran = $_POST['jumlah_angsuran'];
+
+        $query = "UPDATE pinjaman SET 
+                    No_anggota = '$No_anggota',
+                    NIK = '$NIK',
+                    No_akun_piutang = '$No_akun_piutang',
+                    Tanggal_pengaju = '$Tanggal_pengaju',
+                    Tanggal_otorisasi = '$Tanggal_otorisasi',
+                    Besar_pinjaman = '$Besar_pinjaman',
+                    Jangka_waktu = '$Jangka_waktu',
+                    Angsuran_pokok = '$Angsuran_pokok',
+                    Bunga/Tahun = '$Bunga_Tahun',
+                    Bunga/Bulan = '$Bunga_Bulan',
+                    jumlah_angsuran = '$jumlah_angsuran'
+                WHERE ID_pinjaman = '$ID_pinjaman'";
+
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
+
+    function updateSimpanan($data) {
+        global $conn;
+
+        $ID_simpanan = $_POST['ID_simpanan'];
+        $No_anggota = $_POST['No_anggota'];
+        $Tgl_simpanan = $_POST['Tgl_simpanan'];
+        $NIK = $_POST['NIK'];
+        $No_akun_kas = $_POST['No_akun_kas'];
+        $Setoran = $_POST['Setoran'];
+        $Penarikan = $_POST['Penarikan'];
+        $Keterangan_simpanan = $_POST['Keterangan_simpanan'];
+
+        $query = "UPDATE simpanan SET 
+                    No_anggota = '$No_anggota',
+                    Tgl_simpanan = '$Tgl_simpanan',
+                    NIK = '$NIK',
+                    No_akun_kas = '$No_akun_kas',
+                    Setoran = '$Setoran',
+                    Penarikan = '$Penarikan',
+                    Keterangan_simpanan = '$Keterangan_simpanan'
+                WHERE ID_simpanan = '$ID_simpanan'
+        ";
+                
+        $result = mysqli_query($conn, $query);
+
+        return mysqli_affected_rows($conn);
+    }
 
 ?>
